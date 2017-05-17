@@ -31,7 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php7.1-tokenizer \
     php7.1-mysql \
     php7.1-curl \
-    php7.1-mcrypt
+    php7.1-mcrypt \ 
+    php7.1-gd
 
 ## Install Python
 RUN apt-get update && apt-get install -y --no-install-recommends python python-dev python-pip
