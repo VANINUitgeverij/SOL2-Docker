@@ -67,6 +67,9 @@ RUN npm install -g --progress=false -q --unsafe-perm dredd hercule
 RUN apt-get update && apt-get install -y --no-install-recommends ruby-dev ruby
 RUN gem install apiaryio
 
+## Set timezone
+RUN ln -sf /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+
 ## Create user 'default'
 RUN useradd -ms /bin/bash default
 RUN usermod -aG sudo default
