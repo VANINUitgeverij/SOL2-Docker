@@ -50,8 +50,8 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
 ## Install Node.js
-RUN curl -SLO https://deb.nodesource.com/setup_7.x
-RUN bash setup_7.x && rm setup_7.x
+RUN curl -SLO https://deb.nodesource.com/setup_8.x
+RUN bash setup_8.x && rm setup_8.x
 RUN apt-get update && apt-get install -y --no-install-recommends nodejs
 
 ## Install Yarn
