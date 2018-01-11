@@ -80,6 +80,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 ## Create user 'default'
 RUN useradd -ms /bin/bash default
 RUN usermod -aG sudo default
+RUN echo 'default ALL=(ALL) NOPASSWD:ALL' | EDITOR='tee -a' visudo
 RUN echo "default:default" | chpasswd
 USER default
 WORKDIR /home/default
