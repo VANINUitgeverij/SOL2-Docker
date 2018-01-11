@@ -64,7 +64,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends yarn
 RUN npm install -g --progress=false -q --unsafe-perm dredd hercule
 
 ## Install Apiary
-RUN apt-get update && apt-get install -y --no-install-recommends ruby-dev ruby
+RUN apt-get install -y --no-install-recommends zlib1g-dev libssl-dev libreadline-dev libgdbm-dev openssl
+RUN curl -SLO https://cache.ruby-lang.org/pub/ruby/stable/ruby-2.3.6.tar.gz; tar xvfz ruby-2.3.6.tar.gz
+RUN cd ruby-2.3.6; sh configure; make; make install
 RUN gem install apiaryio
 
 ## Install Docker
