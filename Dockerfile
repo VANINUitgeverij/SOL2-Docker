@@ -67,6 +67,11 @@ RUN npm install -g --progress=false -q --unsafe-perm dredd hercule
 RUN apt-get update && apt-get install -y --no-install-recommends ruby-dev ruby
 RUN gem install apiaryio
 
+## Install Docker
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+RUN echo "deb [arch=amd64] https://download.docker.com/linux/debian wheezy stable"|tee /etc/apt/sources.list.d/docker.list
+RUN apt-get update && apt-get install -y --no-install-recommends docker-ce
+
 ## Set timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 
