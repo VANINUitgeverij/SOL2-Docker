@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php7.1-pdo \
     php7.1-tokenizer \
     php7.1-mysql \
+    php7.1-sqlite3 \
     php7.1-curl \
     php7.1-mcrypt \ 
     php7.1-imagick \
