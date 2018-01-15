@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php7.1-imagick \
     php7.1-gd \
     php7.1-xdebug
+RUN apt-get purge -y php7.2-common
 
 # Disable xdebug extension by default
 RUN rm /etc/php/7.1/cli/conf.d/20-xdebug.ini
