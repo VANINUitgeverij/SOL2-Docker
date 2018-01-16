@@ -35,8 +35,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php7.1-mcrypt \ 
     php7.1-imagick \
     php7.1-gd \
-    php7.1-xdebug
+    php7.1-xdebug \
+    php7.1-apcu
 RUN apt-get purge -y php7.2-common
+RUN echo 'apc.enabled=1\n\
+ apc.shm_size=64M\n\
+ apc.ttl=7200\n\
+ apc.mmap_file_mask=/tmp/apc.XXXXXX\n\
+ apc.enable_cli=1' >> /etc/php/7.1/cli/conf.d/20-apcu.ini
 
 # Disable xdebug extension by default
 RUN rm /etc/php/7.1/cli/conf.d/20-xdebug.ini
