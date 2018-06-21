@@ -40,14 +40,21 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
 		build-base \
 		libpng-dev\
 		python \
-    && yarn global add strip-json-comments deep-extend laravel-mix --ignore-optional \
-    # Install modclean to reduce the size of the node_modules folder (and clean it up after using it).
+    # Install modclean to reduce the size of the node_modules folder.
     && mkdir modclean && cd modclean && yarn add modclean \
-    && node_modules/.bin/modclean -n default:safe,default:caution -r -p $(yarn global dir) \
-    && cd .. && rm -rf modclean \
-    && mv $(yarn global dir)/node_modules/ /root/node_modules \
     # Install hercule and dredd
     && yarn global add hercule dredd --ignore-optional --prefix=/usr/local \
+    # Clean the global node_modules folder
+    && node_modules/.bin/modclean -n default:safe,default:caution -r -p $(yarn global dir) \
+    # Pre install laravel mix
+    && mkdir -p /home/circleci/SOL2 && cd /home/circleci/SOL2 \
+    && yarn add strip-json-comments deep-extend laravel-mix --ignore-optional \
+    && rm package.json && rm yarn.lock \
+    && cd - \
+    # Clean the laravel mix node_modules folder
+    && node_modules/.bin/modclean -n default:safe,default:caution -r -p /home/circleci/SOL2 \
+    # Remove modclean
+    && cd .. && rm -rf modclean \
     # Clean dependencies for laravel mix.
     && apk del build-dependencies \
     && yarn cache clean \
