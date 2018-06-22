@@ -9,6 +9,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         yarn \
         python \
         php@php \
+        # Packages needed to run composer.
         php-json@php \
         php-phar@php \
         php-mbstring@php \
@@ -23,9 +24,9 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
    && pip install --no-cache-dir awscli \
    # Clean dependencies for AWS CLI.
    && apk del build-dependencies \
-   # Symlink php7 command -> php
+   # Symlink php7 command -> php.
    && ln -s /usr/bin/php7 /usr/bin/php \
-   # Install composer
+   # Install composer.
    && curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
    && rm -rf /var/cache/apk/*

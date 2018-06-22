@@ -8,22 +8,26 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         openssh \
         yarn \
         php@php \
-        php-mcrypt@php \
+        # Packages needed to run composer.
         php-json@php \
         php-phar@php \
-        php-pdo@php \
         php-mbstring@php \
-        php-openssl@php \
         php-zlib@php \
-        php-dom@php \
-        php-zip@php \
+        php-openssl@php \
+        # Package needed for colors in the terminal.
         php-posix@php \
+        # Packages for SOL2.
+        php-session@php \
+        php-dom@php \
+        php-pdo@php \
+        php-mcrypt@php \
+        php-zip@php \
+        php-iconv@php \
+        php-imagick@php \
+        php-gd@php \
+        # Packages for SQLite/APCU testing.
         php-apcu@php \
         php-pdo_sqlite@php \
-        php-imagick@php \
-        php-session@php \
-        php-iconv@php \
-        php-gd@php \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
    && apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv \
    # Symlink php7 command -> php

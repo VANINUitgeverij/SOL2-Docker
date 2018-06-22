@@ -8,16 +8,19 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         openssh \
         yarn \
         php@php \
-        php-mcrypt@php \
+        # Packages needed to run composer.
         php-json@php \
         php-phar@php \
-        php-pdo@php \
         php-mbstring@php \
-        php-openssl@php \
         php-zlib@php \
+        php-openssl@php \
+        # Package needed for colors in the terminal.
+        php-posix@php \
+        # Packages needed to keep Phpstan happy.
+        php-mcrypt@php \
+        php-pdo@php \
         php-dom@php \
         php-zip@php \
-        php-posix@php \
    # Symlink php7 command -> php
    && ln -s /usr/bin/php7 /usr/bin/php \
    # Install composer
