@@ -25,9 +25,10 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         php-iconv@php \
         php-imagick@php \
         php-gd@php \
-        # Packages for SQLite/APCU testing.
+        # Packages for testing.
         php-apcu@php \
         php-pdo_sqlite@php \
+        php-pdo_mysql@php \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
    && apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv \
    # Symlink php7 command -> php
