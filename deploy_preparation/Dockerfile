@@ -29,5 +29,28 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
    # Install composer.
    && curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
+   # Dependencies needed to install laravel-mix
+   && apk add --virtual build-dependencies --update --no-cache \
+     libtool \
+     automake \
+     nasm  \
+     autoconf  \
+     build-base \
+     libpng-dev\
+     python \
+   # Install modclean to reduce the size of the node_modules folder.
+   && mkdir modclean && cd modclean && yarn add modclean \
+   # Pre install laravel mix
+   && mkdir -p /home/circleci/SOL2 && cd /home/circleci/SOL2 \
+   && yarn add strip-json-comments deep-extend laravel-mix --ignore-optional \
+   && rm package.json && rm yarn.lock \
+   && cd - \
+   # Clean the laravel mix node_modules folder
+   && node_modules/.bin/modclean -n default:safe,default:caution -r -p /home/circleci/SOL2 \
+   # Remove modclean
+   && cd .. && rm -rf modclean \
+   # Clean dependencies for laravel mix.
+   && apk del build-dependencies \
+   && yarn cache clean \
    && rm -rf /var/cache/apk/*
 ENV PATH ${PATH}:vendor/bin:node_modules/.bin
