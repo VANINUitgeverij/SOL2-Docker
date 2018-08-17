@@ -8,6 +8,10 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         openssh \
         yarn \
         python \
+        # Needed for pngquant (try to remove these again, they should not be needed).
+        build-base \
+        libpng-dev\
+        # PHP dependencies.
         php@php \
         # Packages needed to run composer.
         php-json@php \
@@ -35,8 +39,6 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
      automake \
      nasm  \
      autoconf  \
-     build-base \
-     libpng-dev\
      python \
    # Install modclean to reduce the size of the node_modules folder.
    && mkdir modclean && cd modclean && yarn add modclean \
