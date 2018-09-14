@@ -1,34 +1,36 @@
 FROM alpine:3.7
 ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositories \
-    && apk add --update --no-cache \
+RUN apk add --update --no-cache \
         bash \
         curl \
         git \
         openssh \
         yarn \
-        php@php \
+    && apk add --update --no-cache --repository https://php.codecasts.rocks/v3.7/php-7.1 \
+        php \
         # Packages needed to run composer.
-        php-json@php \
-        php-phar@php \
-        php-mbstring@php \
-        php-zlib@php \
-        php-openssl@php \
+        php-json \
+        php-phar \
+        php-mbstring \
+        php-zlib \
+        php-openssl \
         # Package needed for colors in the terminal.
-        php-posix@php \
+        php-posix \
         # Packages for SOL2.
-        php-session@php \
-        php-dom@php \
-        php-pdo@php \
-        php-mcrypt@php \
-        php-zip@php \
-        php-iconv@php \
-        php-imagick@php \
-        php-gd@php \
+        php-session \
+        php-dom \
+        php-pdo \
+        php-mcrypt \
+        php-zip \
+        php-iconv \
+        php-imagick \
+        php-gd \
         # Packages for testing.
-        php-apcu@php \
-        php-pdo_sqlite@php \
-        php-pdo_mysql@php \
+        php-apcu \
+        php-pdo_sqlite \
+        php-pdo_mysql \
+        # Needed for Phanybar dependency of the results printer.
+        php-sockets \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
    && apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv \
    # Symlink php7 command -> php
