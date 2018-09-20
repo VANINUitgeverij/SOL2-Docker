@@ -29,6 +29,7 @@ RUN apk add --update --no-cache \
         php-apcu \
         php-pdo_sqlite \
         php-pdo_mysql \
+        php-redis \
         # Needed for Phanybar dependency of the results printer.
         php-sockets \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
