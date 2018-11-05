@@ -1,12 +1,13 @@
 FROM alpine:3.8
-RUN apk add --update --no-cache \
+RUN apk update \
+    && apk add --no-cache \
         bash \
         curl \
         git \
         openssh \
         yarn \
         ruby \
-    && apk add --virtual build-dependencies --update --no-cache \
+    && apk add --virtual build-dependencies --no-cache \
         g++ \
         ruby-dev \
         make \

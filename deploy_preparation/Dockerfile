@@ -1,7 +1,8 @@
 FROM alpine:3.7
 ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositories \
-    && apk add --update --no-cache \
+    && apk update \
+    && apk add --no-cache \
         bash \
         curl \
         git \
@@ -23,7 +24,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
         php-pdo@php \
         # Package needed for colors in the terminal.
         php-posix@php \
-   && apk add --virtual build-dependencies --update --no-cache \
+   && apk add --virtual build-dependencies --no-cache \
         py-pip \
    && pip install --no-cache-dir awscli \
    # Clean dependencies for AWS CLI.
@@ -34,7 +35,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositorie
    && curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
    # Dependencies needed to install laravel-mix
-   && apk add --virtual build-dependencies --update --no-cache \
+   && apk add --virtual build-dependencies --no-cache \
      libtool \
      automake \
      nasm  \
