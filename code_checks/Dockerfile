@@ -18,14 +18,24 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
         # Package needed for colors in the terminal.
         php-posix@php \
         # Packages needed to keep Phpstan happy.
-        php-mcrypt@php \
         php-pdo@php \
         php-dom@php \
         php-zip@php \
+    # Install mcrypt.
+    && apk add --virtual build-dependencies --no-cache \
+        autoconf  \
+        build-base \
+        libmcrypt-dev \
+    && apk add --no-cache \
+        php-dev@php \
+        php-pear@php \
+    && pecl install mcrypt-1.0.1 \
    # Symlink php7 command -> php
    && ln -s /usr/bin/php7 /usr/bin/php \
    # Install composer
    && curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
+   # Clean mcrypt dependencies.
+   && apk del build-dependencies php-dev php-pear \
    && rm -rf /var/cache/apk/*
 ENV PATH ${PATH}:vendor/bin:node_modules/.bin
