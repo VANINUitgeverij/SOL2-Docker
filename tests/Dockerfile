@@ -1,37 +1,38 @@
-FROM alpine:3.7
+FROM alpine:3.8
 ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-RUN apk add --update --no-cache \
+RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositories \
+    && apk update \
+    && apk add --no-cache \
         bash \
         curl \
         git \
         openssh \
         yarn \
-    && apk add --update --no-cache --repository https://php.codecasts.rocks/v3.7/php-7.1 \
-        php \
+    && apk add --no-cache \
+        php@php \
         # Packages needed to run composer.
-        php-json \
-        php-phar \
-        php-mbstring \
-        php-zlib \
-        php-openssl \
+        php-json@php \
+        php-phar@php \
+        php-mbstring@php \
+        php-zlib@php \
+        php-openssl@php \
         # Package needed for colors in the terminal.
-        php-posix \
+        php-posix@php \
         # Packages for SOL2.
-        php-session \
-        php-dom \
-        php-pdo \
-        php-mcrypt \
-        php-zip \
-        php-iconv \
-        php-imagick \
-        php-gd \
+        php-session@php \
+        php-dom@php \
+        php-pdo@php \
+        php-zip@php \
+        php-iconv@php \
+        php-imagick@php \
+        php-gd@php \
         # Packages for testing.
-        php-apcu \
-        php-pdo_sqlite \
-        php-pdo_mysql \
-        php-redis \
+        php-apcu@php \
+        php-pdo_sqlite@php \
+        php-pdo_mysql@php \
+        php-redis@php \
         # Needed for Phanybar dependency of the results printer.
-        php-sockets \
+        php-sockets@php \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
    && apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv \
    # Symlink php7 command -> php
@@ -40,7 +41,7 @@ RUN apk add --update --no-cache \
    && curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
    # Dependencies needed to install laravel-mix and dredd.
-   && apk add --virtual build-dependencies --update --no-cache \
+   && apk add --virtual build-dependencies --no-cache \
         libtool \
         automake \
 		nasm  \
@@ -48,6 +49,12 @@ RUN apk add --update --no-cache \
 		build-base \
 		libpng-dev\
 		python \
+        libmcrypt-dev \
+   # Install mcrypt.
+   && apk add --no-cache \
+       php-dev@php \
+       php-pear@php \
+    && pecl install mcrypt-1.0.1 \
     # Install modclean to reduce the size of the node_modules folder.
     && mkdir modclean && cd modclean && yarn add modclean \
     # Install hercule and dredd
@@ -65,6 +72,8 @@ RUN apk add --update --no-cache \
     && cd .. && rm -rf modclean \
     # Clean dependencies for laravel mix.
     && apk del build-dependencies \
+    # Clean mcrypt dependencies.
+    && apk del php-dev php-pear \
     && yarn cache clean \
     && rm -rf /var/cache/apk/*
 ENV PATH ${PATH}:vendor/bin:node_modules/.bin
