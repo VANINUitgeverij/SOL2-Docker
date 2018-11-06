@@ -54,6 +54,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
    && apk add --no-cache \
        php-dev@php \
        php-pear@php \
+       libmcrypt \
     && pecl install mcrypt-1.0.1 \
     # Install modclean to reduce the size of the node_modules folder.
     && mkdir modclean && cd modclean && yarn add modclean \

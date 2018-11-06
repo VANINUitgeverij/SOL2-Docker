@@ -29,6 +29,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
     && apk add --no-cache \
         php-dev@php \
         php-pear@php \
+        libmcrypt \
     && pecl install mcrypt-1.0.1 \
    # Symlink php7 command -> php
    && ln -s /usr/bin/php7 /usr/bin/php \
