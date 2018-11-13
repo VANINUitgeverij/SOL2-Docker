@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM node:11.1-alpine
 ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositories \
     && apk update \
