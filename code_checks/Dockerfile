@@ -15,6 +15,9 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
         php-mbstring@php \
         php-zlib@php \
         php-openssl@php \
+        php-session@php \
+        php-bcmath@php \
+        php-apcu@php \
         # Package needed for colors in the terminal.
         php-posix@php \
         # Packages needed to keep Phpstan happy.

@@ -26,6 +26,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
         php-iconv@php \
         php-imagick@php \
         php-gd@php \
+        php-bcmath@php \
         # Packages for testing.
         php-apcu@php \
         php-pdo_sqlite@php \
