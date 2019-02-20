@@ -18,6 +18,8 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
         php-session@php \
         php-bcmath@php \
         php-apcu@php \
+        # Needed for the compression option in config/database.php
+        php-pdo_mysql@php \
         # Package needed for colors in the terminal.
         php-posix@php \
         # Packages needed to keep Phpstan happy.
