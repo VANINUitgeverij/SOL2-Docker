@@ -28,6 +28,7 @@ RUN apt-get update \
         php7.2-pdo \
         php7.2-tokenizer \
         php7.2-sqlite3 \
+        php7.2-mysql \
         php7.2-curl \
         php7.2-imagick \
         php7.2-gd \
