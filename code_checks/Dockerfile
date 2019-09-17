@@ -1,6 +1,6 @@
-FROM alpine:3.9
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-RUN echo "@php https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repositories \
+FROM alpine:3.8
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN echo "@php https://dl.bintray.com/php-alpine/v3.8/php-7.2" >> /etc/apk/repositories \
     && apk update \
     && apk add --no-cache \
         bash \
@@ -35,7 +35,7 @@ RUN echo "@php https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repos
         php-dev@php \
         php-pear@php \
         libmcrypt \
-    && pecl install mcrypt-1.0.2 \
+    && pecl install mcrypt-1.0.1 \
    # Symlink php7 command -> php
    && ln -s /usr/bin/php7 /usr/bin/php \
    # Install composer

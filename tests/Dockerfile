@@ -1,6 +1,6 @@
 FROM alpine:3.8
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositories \
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN echo "@php https://dl.bintray.com/php-alpine/v3.8/php-7.2" >> /etc/apk/repositories \
     && apk update \
     && apk add --no-cache \
         bash \
@@ -35,7 +35,7 @@ RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.2" >> /etc/apk/repositorie
         # Needed for Phanybar dependency of the results printer.
         php-sockets@php \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
-   && apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv \
+   && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv \
    # Symlink php7 command -> php
    && ln -s /usr/bin/php7 /usr/bin/php \
    # Install composer
