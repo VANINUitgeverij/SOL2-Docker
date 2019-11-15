@@ -34,6 +34,8 @@ RUN echo "@php https://dl.bintray.com/php-alpine/v3.8/php-7.2" >> /etc/apk/repos
         php-redis@php \
         # Needed for Phanybar dependency of the results printer.
         php-sockets@php \
+        # Needed for iOmniwize import.
+        php-xmlreader@php \
    # Workaround for iconv issue in alpine (https://github.com/docker-library/php/issues/240)
    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv \
    # Symlink php7 command -> php

@@ -26,6 +26,8 @@ RUN echo "@php https://dl.bintray.com/php-alpine/v3.8/php-7.2" >> /etc/apk/repos
         php-pdo@php \
         php-dom@php \
         php-zip@php \
+        # Needed for iOmniwize import.
+        php-xmlreader@php \
     # Install mcrypt.
     && apk add --virtual build-dependencies --no-cache \
         autoconf  \
